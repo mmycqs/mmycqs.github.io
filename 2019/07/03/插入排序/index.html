@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
-  <title>写在博客创立之初 | mmycqs的博客</title>
+  <title>插入排序 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安静只剩下钢琴陪我谈了一天 睡着的大提琴 安静的 旧旧的…  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;到现在入职也快满三个月，工作强度大的有些出乎意料，加班加到怀疑人生。每天的忙碌让我精疲力尽，无所适从。 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;然而，如此的忙碌却也只是在心头抹过一丝痛，并未带来什么实质的收益。看似忙碌，学到的东西也只是浅尝辄止，">
-<meta name="keywords" content="随想">
+  <meta name="description" content="插入排序思想：每次选择一个数插入到有序的数组中 123456789101112public static void sort(int[] arr)&amp;#123;    int n = arr.length;    for (int i = 1; i &amp;lt; n; i++) &amp;#123;        int e = arr[i];        int j = i;        for (; j">
+<meta name="keywords" content="Java,大数据,JavaScript,机械狗">
 <meta property="og:type" content="article">
-<meta property="og:title" content="写在博客创立之初">
-<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;01&#x2F;%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D&#x2F;index.html">
+<meta property="og:title" content="插入排序">
+<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;03&#x2F;%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="安静只剩下钢琴陪我谈了一天 睡着的大提琴 安静的 旧旧的…  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;到现在入职也快满三个月，工作强度大的有些出乎意料，加班加到怀疑人生。每天的忙碌让我精疲力尽，无所适从。 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;然而，如此的忙碌却也只是在心头抹过一丝痛，并未带来什么实质的收益。看似忙碌，学到的东西也只是浅尝辄止，">
+<meta property="og:description" content="插入排序思想：每次选择一个数插入到有序的数组中 123456789101112public static void sort(int[] arr)&amp;#123;    int n = arr.length;    for (int i = 1; i &amp;lt; n; i++) &amp;#123;        int e = arr[i];        int j = i;        for (; j">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-28T14:31:07.006Z">
+<meta property="og:updated_time" content="2019-11-02T09:42:41.845Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -137,35 +137,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-写在博客创立之初" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-插入排序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      写在博客创立之初
+      插入排序
     </h1>
   
 
         
-        <a href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/" class="archive-article-date">
-  	<time datetime="2019-06-30T23:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
+        <a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2019-07-03T09:11:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安静"><a href="#安静" class="headerlink" title="安静"></a>安静</h2><p>只剩下钢琴陪我谈了一天</p>
-<p>睡着的大提琴</p>
-<p>安静的 旧旧的…</p>
-<hr>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到现在入职也快满三个月，工作强度大的有些出乎意料，加班加到怀疑人生。每天的忙碌让我精疲力尽，无所适从。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然而，如此的忙碌却也只是在心头抹过一丝痛，并未带来什么实质的收益。看似忙碌，学到的东西也只是浅尝辄止，达到基本能用的水平。然心有不甘，不想碌碌无为，浮于表面，于是有了此博客。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于此留念</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019.7.1</p>
-
+        <h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>思想：每次选择一个数插入到有序的数组中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> e = arr[i];</span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        <span class="keyword">for</span> (; j &gt; <span class="number">0</span> &amp;&amp; e &lt; arr[j-<span class="number">1</span>] ; j--) &#123;</span><br><span class="line">            arr[j] = arr[j-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        arr[j] = e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -194,17 +187,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随想</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -255,7 +237,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -269,15 +251,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          算法学习--序篇
+          Java多线程入门--序篇
         
       </div>
     </a>
   
+  
+    <a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">选择排序</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
