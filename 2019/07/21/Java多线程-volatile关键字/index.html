@@ -6,16 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
-  <title>Archives: 2019 | mmycqs的博客</title>
+  <title>Java多线程--volatile关键字 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不会编程的机械狗，于爱国企业混日子">
-<meta name="keywords" content="Java,大数据,JavaScript,机械狗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mmycqs的博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;archives&#x2F;2019&#x2F;index.html">
+  <meta name="description" content="概述volatile是保证共享变量变化可见性的关键字。所谓可见性，就是一个变量在多个线程间可见，而volatile保证了共享变量的改变在多线程之间能够及时的发现。 示例代码12345678910111213141516171819202122public class T &amp;#123;    &#x2F;*volatile*&#x2F; boolean running = true;&#x2F;&#x2F; 对比一下有无volatile的">
+<meta name="keywords" content="Java多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程--volatile关键字">
+<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;21&#x2F;Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="不会编程的机械狗，于爱国企业混日子">
+<meta property="og:description" content="概述volatile是保证共享变量变化可见性的关键字。所谓可见性，就是一个变量在多个线程间可见，而volatile保证了共享变量的改变在多线程之间能够及时的发现。 示例代码12345678910111213141516171819202122public class T &amp;#123;    &#x2F;*volatile*&#x2F; boolean running = true;&#x2F;&#x2F; 对比一下有无volatile的">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-02T13:27:59.188Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -130,74 +131,85 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java多线程-volatile关键字" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch/" class="archive-article-date">
-  	<time datetime="2019-07-23T12:29:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch/">Java多线程--线程通信wait/notify countdownlatch</a>
+    <h1 class="article-title" itemprop="name">
+      Java多线程--volatile关键字
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+        
+        <a href="/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
   	<time datetime="2019-07-21T13:13:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/">Java多线程--volatile关键字</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>volatile是保证共享变量变化可见性的关键字。所谓<strong>可见性</strong>，就是一个变量在多个线程间可见，而volatile保证了共享变量的改变在多线程之间能够及时的发现。</p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*volatile*/</span> <span class="keyword">boolean</span> running = <span class="keyword">true</span>;<span class="comment">// 对比一下有无volatile的情况下，整个程序运行结果的区别</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"m start..."</span>);</span><br><span class="line">        <span class="keyword">while</span> (running) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"m end..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        T t = <span class="keyword">new</span> T();</span><br><span class="line">        <span class="keyword">new</span> Thread(t::m, <span class="string">"t1"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        t.running = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<p>无volatile运行结果是一直运行，有volatile运行结果</p>
+<a id="more"></a>
+
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>在上面代码中，变量running存在于堆内存的 t 对象中。</p>
+<p>当线程 t1 开始运行的时候，会把running值从内存中读到 t1 线程的工作区，在运行过程中直接使用这个copy，并不会每次都去读取堆内存，这样，在主线程修改running 的值之后，t1 线程忙于执行while死循环（这里有个变式，如果在while循环中加入一些执行的代码，让线程有时间在下一次循环之前读取一下running的值，可能结果会有不同）而感知不到，所以不会停止运行。</p>
+<p>使用volatile ，会强制所有线程都去堆内存中读取 running 的值。</p>
+<h3 id="volatile与synchronized区别"><a href="#volatile与synchronized区别" class="headerlink" title="volatile与synchronized区别"></a>volatile与synchronized区别</h3><p>volatile与synchronized区别体现在<strong>原子性</strong>上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)</span><br><span class="line">            count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        T t = <span class="keyword">new</span> T();</span><br><span class="line">        List&lt;Thread&gt; threads = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            threads.add(<span class="keyword">new</span> Thread(t::m, <span class="string">"t"</span> + i));</span><br><span class="line">        &#125;</span><br><span class="line">        threads.forEach((o) -&gt; o.start());</span><br><span class="line"></span><br><span class="line">        threads.forEach((o) -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                o.join();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        System.out.println(t.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，成员变量count 在线程之间可见，10个线程共同完成为count 自加10000的操作，并通过join()方法将10个线程结果合到一起，我们理想的计算结果应该是count 被加了<strong>10,0000</strong>次（10个线程每个线程加10000次），但是执行结果却是：</p>
+<blockquote>
+<p>33700</p>
+<p>37527</p>
+<p>37527</p>
+<p>37527</p>
+</blockquote>
+<h3 id="结果分析-1"><a href="#结果分析-1" class="headerlink" title="结果分析"></a>结果分析</h3><p>volatile保证了数据的可见性，但是没有保证对数据操作的原子性，也就是说，共享数据可能会因高并发被同一个值覆盖。通俗点解释，多个线程同时改变主内存中的某个值的时候，一个线程改变了这个值，并通知给其他线程及时更新自己线程内缓冲区的副本，但是由于线程改变volatile修饰的变量后需要写入到公共内存中+其他线程再读取，这个过程必然会慢于其他线程写出的速度，导致其他线程还没来得及更新自己副本变量就执行了写出，导致主内存中的数据被覆盖，因此在高并发的情况下不对某个数据的写入加锁，即便设置了volatile可见性，依然会出现问题。</p>
+<p><strong>因此，volatile比synchronized速度快很多，所以，如果程序中只需要保证可见性，那就要使用volatile；而如果要同时保证</strong></p>
+<p><strong>可见性 + 原子性 ，则一定要加锁。</strong></p>
+<h3 id="解决不一致问题（扩展）"><a href="#解决不一致问题（扩展）" class="headerlink" title="解决不一致问题（扩展）"></a><strong>解决不一致问题（扩展）</strong></h3><p>上一节中volatile无法保证原子性，导致最后的结果远远小于10,0000，除了比较常规的将count++ 加锁之外是否有其他的比较好的解决方法呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 解决同样的问题更高效的方法，是使用AtomicXXX类，</span></span><br><span class="line"><span class="comment"> * AtomicXXX类中的每一个方法都是原子性的，但是不能保证多个方法连续调用是原子性的。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="comment">//    volatile int count = 0;</span></span><br><span class="line">    AtomicInteger count = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)</span><br><span class="line"><span class="comment">//            count++;</span></span><br><span class="line">            count.getAndIncrement();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        T t = <span class="keyword">new</span> T();</span><br><span class="line">        List&lt;Thread&gt; threads = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            threads.add(<span class="keyword">new</span> Thread(t::m, <span class="string">"t"</span> + i));</span><br><span class="line">        &#125;</span><br><span class="line">        threads.forEach((o) -&gt; o.start());</span><br><span class="line"></span><br><span class="line">        threads.forEach((o) -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                o.join();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        System.out.println(t.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码解决了volatile无法保证原子性的问题，使用AtomicXXX类，可以保证其方法操作是原子性的，执行结果如预期，为10000</p>
+<p>incrementAndGet()方法，可以理解为加了synchronized的count++（保证了count++的原子性），但其实它的实现并不是通过synchronized而是使用了一种系统相当底层的实现，所以AtomicXXX类中方法的效率要比synchronized高很多。所以，对于纯计算的操作，建议使用AtomicXXX类。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>A B线程都用到了一个变量，Java默认是A线程中保留一个copy ， 这样如果B 线程修改了该变量，则A线程未必知道。</p>
+<p>使用volatile关键字，会让所有线程都会读到变量的修改值。</p>
+<p><strong>但是，使用volatile并不能保证在多个线程共同修改共享变量时所带来的不一致问题，也就是说volatile 不能代替 synchronized。</strong></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -209,285 +221,115 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/18/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2019-07-18T11:32:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-18</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java多线程--线程通信wait/notify countdownlatch
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/18/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java多线程--synchronized关键字</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/18/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">Java多线程--synchronized关键字</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/" class="archive-article-date">
-  	<time datetime="2019-07-15T10:57:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/">Java多线程--死锁状态模拟</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2019-07-14T23:01:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/">Java多线程入门--序篇</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-03T09:11:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-02T23:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2019-07-02T22:25:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/">算法学习--序篇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/" class="archive-article-date">
-  	<time datetime="2019-06-30T23:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/">写在博客创立之初</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随想</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -510,8 +352,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
