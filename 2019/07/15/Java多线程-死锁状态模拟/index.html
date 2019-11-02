@@ -6,16 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
-  <title>Archives | mmycqs的博客</title>
+  <title>Java多线程--死锁状态模拟 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不会编程的机械狗，于爱国企业混日子">
-<meta name="keywords" content="Java,大数据,JavaScript,机械狗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mmycqs的博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;archives&#x2F;index.html">
+  <meta name="description" content="概述死锁的状态的模拟：Thread_1在获得A对象的锁后，紧接着去请求B对象的锁 ，Thread_2在获得了B对象的锁后，紧接着又去请求A对象的锁。 代码描述1234567891011121314151617181920212223242526272829303132public class DeadLockDemo &amp;#123;  static class A &amp;#123;      publi">
+<meta name="keywords" content="Java多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程--死锁状态模拟">
+<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;15&#x2F;Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="不会编程的机械狗，于爱国企业混日子">
+<meta property="og:description" content="概述死锁的状态的模拟：Thread_1在获得A对象的锁后，紧接着去请求B对象的锁 ，Thread_2在获得了B对象的锁后，紧接着又去请求A对象的锁。 代码描述1234567891011121314151617181920212223242526272829303132public class DeadLockDemo &amp;#123;  static class A &amp;#123;      publi">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-02T11:25:32.256Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -130,36 +131,59 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Java多线程-死锁状态模拟" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Java多线程--死锁状态模拟
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/" class="archive-article-date">
+
+        
+        <a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/" class="archive-article-date">
   	<time datetime="2019-07-15T10:57:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/">Java多线程--死锁状态模拟</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>死锁的状态的模拟：Thread_1在获得A对象的锁后，紧接着去请求B对象的锁 ，Thread_2在获得了B对象的锁后，紧接着又去请求A对象的锁。</p>
+<h3 id="代码描述"><a href="#代码描述" class="headerlink" title="代码描述"></a>代码描述</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockDemo</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">saying</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          System.out.println(Thread.currentThread().getName() + <span class="string">" A start..........."</span>);</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">              Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">          &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">new</span> B().saying();</span><br><span class="line">          System.out.println(Thread.currentThread().getName() + <span class="string">" A end............."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">saying</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          System.out.println(Thread.currentThread().getName() + <span class="string">" B start..........."</span>);</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">              Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">          &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">new</span> A().saying();</span><br><span class="line">          System.out.println(Thread.currentThread().getName() + <span class="string">" B end............."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">new</span> Thread(() -&gt; <span class="keyword">new</span> A().saying(), <span class="string">"t1"</span>).start();</span><br><span class="line">      <span class="keyword">new</span> Thread(() -&gt; <span class="keyword">new</span> B().saying(), <span class="string">"t2"</span>).start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>在线程 t1 调用A对象的saying互斥方法的时候，t1拿到了A对象的锁，而如果想完成saying方法必须去请求B对象的锁才可以执行到B对象的saying互斥方法。线程 t2调用B对象的saying互斥方法的时候，t2拿到了B对象的锁，而如果想完成saying方法必须去请求A对象的锁才可以执行到A对象的saying互斥方法。 </p>
+<p>这就导致了死锁的出现，程序会陷入无休止的“死循环”中。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -171,209 +195,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2019-07-14T23:01:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java多线程入门--序篇</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/">Java多线程入门--序篇</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-03T09:11:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-02T23:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2019-07-02T22:25:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/">算法学习--序篇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/" class="archive-article-date">
-  	<time datetime="2019-06-30T23:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/">写在博客创立之初</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随想</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -396,8 +317,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
