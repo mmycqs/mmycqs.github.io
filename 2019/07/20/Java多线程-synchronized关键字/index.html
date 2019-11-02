@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
   <title>Java多线程--synchronized关键字 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概要sychronized关键字通过加锁，实现同步。 synchronized锁定的是对象！是堆中实际的对象，并不是栈中的引用 锁对象还是锁方法？想要证明是锁对象其实非常简单，下面这个demo可以看出synchronized锁定的是同一个共享对象，而不是这个对象的某一个加锁方法。 1234567891011121314151617181920212223import java.util.concu">
+  <meta name="description" content="概要sychronized关键字通过加锁，实现同步。 synchronized锁定的是对象！是堆中实际的对象，并不是栈中的引用 锁对象还是锁方法？想要证明是锁对象其实非常简单，下面这个demo可以看出synchronized锁定的是同一个共享对象，而不是这个对象的某一个加锁方法。">
 <meta name="keywords" content="Java多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java多线程--synchronized关键字">
 <meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;20&#x2F;Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="概要sychronized关键字通过加锁，实现同步。 synchronized锁定的是对象！是堆中实际的对象，并不是栈中的引用 锁对象还是锁方法？想要证明是锁对象其实非常简单，下面这个demo可以看出synchronized锁定的是同一个共享对象，而不是这个对象的某一个加锁方法。 1234567891011121314151617181920212223import java.util.concu">
+<meta property="og:description" content="概要sychronized关键字通过加锁，实现同步。 synchronized锁定的是对象！是堆中实际的对象，并不是栈中的引用 锁对象还是锁方法？想要证明是锁对象其实非常简单，下面这个demo可以看出synchronized锁定的是同一个共享对象，而不是这个对象的某一个加锁方法。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-02T12:19:21.752Z">
+<meta property="og:updated_time" content="2019-11-02T12:33:35.064Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -153,7 +153,7 @@
       
         <h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>sychronized关键字通过加锁，实现同步。</p>
 <p><strong>synchronized锁定的是对象！是堆中实际的对象，并不是栈中的引用</strong></p>
-<h3 id="锁对象还是锁方法？"><a href="#锁对象还是锁方法？" class="headerlink" title="锁对象还是锁方法？"></a>锁对象还是锁方法？</h3><p>想要证明是锁对象其实非常简单，下面这个demo可以看出synchronized锁定的是同一个共享对象，而不是这个对象的某一个加锁方法。</p>
+<h3 id="锁对象还是锁方法？"><a href="#锁对象还是锁方法？" class="headerlink" title="锁对象还是锁方法？"></a>锁对象还是锁方法？</h3><p>想要证明是锁对象其实非常简单，下面这个demo可以看出synchronized锁定的是同一个共享对象，而不是这个对象的某一个加锁方法。<a id="more"></a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObjectLockDemo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  T t = <span class="keyword">new</span> T();</span><br><span class="line">  <span class="keyword">new</span> Thread(() -&gt; t.doSomthing(), <span class="string">"t1"</span>).start();</span><br><span class="line">  <span class="keyword">new</span> Thread(() -&gt; t.doOtherthing(), <span class="string">"t2"</span>).start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">doSomthing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(Thread.currentThread().getName() + <span class="string">" do something start..."</span>);</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">  	TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">  	e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">    System.out.println(Thread.currentThread().getName() + <span class="string">" do something end..."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">doOtherthing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(Thread.currentThread().getName() + <span class="string">" do otherthing...start"</span>);</span><br><span class="line">    System.out.println(Thread.currentThread().getName() + <span class="string">" do otherthing...end"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面这个例子非常简单。首先，我们为T类创建了两个加锁的方法<strong>doSomthing()</strong>和<strong>doOtherthing()</strong>，在主线程中，我们创建了一个 t 对象，然后通过线程 t1 调用 对象 t 的<strong>doSomthing()</strong>加锁方法，紧接着线程 t2 去调用 对象 t 的另一个加锁方法<strong>doOtherthing()</strong>，<strong>如果synchronized锁住的是方法，那么在 t1 执行的5秒内，t2 可以自由的执行doOtherthing()方法而不受限制，但是如果是锁住了 对象那么线程 t2 只有当 t1 执行完成后释放了对象锁，才能去执行 doOtherthing()方法，也就证明了synchronized锁住的是 t 对象。</strong><br>最后代码的输出是：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t1 <span class="keyword">do</span> something start...</span><br><span class="line">t1 <span class="keyword">do</span> something end...</span><br><span class="line">t2 <span class="keyword">do</span> otherthing...start</span><br><span class="line">t2 <span class="keyword">do</span> otherthing...end</span><br></pre></td></tr></table></figure>
@@ -302,6 +302,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java多线程--线程通信wait/notify countdownlatch
+        
+      </div>
+    </a>
   
   
     <a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/" id="article-nav-older" class="article-nav-link-wrap">
