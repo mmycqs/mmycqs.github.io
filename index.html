@@ -132,6 +132,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java多线程-Lock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/">Java多线程--Lock</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/" class="archive-article-date">
+  	<time datetime="2019-07-25T00:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ReentrantLock是Lock接口的一个实现，可以用于替代synchronized。即ReentrantLock是<strong>可替代synchronized的手动锁</strong></p>
+<p>使用ReentrantLock可以完成类似synchronized(this)的功能，需要注意的是，<strong>就算线程已经执行完毕，Lock也不会自动释放锁，必须要手动释放锁</strong>！！</p>
+<p>与synchronized不同的是：<strong>使用synchronized锁定的话如果遇到异常，JVM会自动释放锁，但是Lock必须手动释放锁，因此经常在finally中进行锁的释放。</strong></p>
+        
+          <a class="article-more-a" href="/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java多线程-线程通信wait-notify-countdownlatch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -916,11 +994,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随想</a>
+                <a href="javascript:void(0)" class="js-tag color5">编程内功</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编程内功</a>
+                <a href="javascript:void(0)" class="js-tag color3">随想</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,16 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
-  <title>Archives: 2019/7 | mmycqs的博客</title>
+  <title>Java多线程--Lock | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不会编程的机械狗，于爱国企业混日子">
-<meta name="keywords" content="Java,大数据,JavaScript,机械狗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mmycqs的博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;archives&#x2F;2019&#x2F;07&#x2F;index.html">
+  <meta name="description" content="概述ReentrantLock是Lock接口的一个实现，可以用于替代synchronized。即ReentrantLock是可替代synchronized的手动锁 使用ReentrantLock可以完成类似synchronized(this)的功能，需要注意的是，就算线程已经执行完毕，Lock也不会自动释放锁，必须要手动释放锁！！ 与synchronized不同的是：使用synchronized锁">
+<meta name="keywords" content="Java多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程--Lock">
+<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;25&#x2F;Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="不会编程的机械狗，于爱国企业混日子">
+<meta property="og:description" content="概述ReentrantLock是Lock接口的一个实现，可以用于替代synchronized。即ReentrantLock是可替代synchronized的手动锁 使用ReentrantLock可以完成类似synchronized(this)的功能，需要注意的是，就算线程已经执行完毕，Lock也不会自动释放锁，必须要手动释放锁！！ 与synchronized不同的是：使用synchronized锁">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-03T00:54:57.719Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -130,36 +131,87 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Java多线程-Lock" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Java多线程--Lock
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/" class="archive-article-date">
+
+        
+        <a href="/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/" class="archive-article-date">
   	<time datetime="2019-07-25T00:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/">Java多线程--Lock</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ReentrantLock是Lock接口的一个实现，可以用于替代synchronized。即ReentrantLock是<strong>可替代synchronized的手动锁</strong></p>
+<p>使用ReentrantLock可以完成类似synchronized(this)的功能，需要注意的是，<strong>就算线程已经执行完毕，Lock也不会自动释放锁，必须要手动释放锁</strong>！！</p>
+<p>与synchronized不同的是：<strong>使用synchronized锁定的话如果遇到异常，JVM会自动释放锁，但是Lock必须手动释放锁，因此经常在finally中进行锁的释放。</strong></p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<h3 id="程序示例"><a href="#程序示例" class="headerlink" title="程序示例"></a>程序示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReentrantLockDemo</span> </span>&#123;</span><br><span class="line">    Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">                System.out.print(i + <span class="string">" "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();<span class="comment">// 比较一下未释放锁前后的执行区别</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">m2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        System.out.println(<span class="string">"m2..."</span>);</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ReentrantLockDemo r1 = <span class="keyword">new</span> ReentrantLockDemo();</span><br><span class="line">        <span class="keyword">new</span> Thread(r1::m1).start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">new</span> Thread(r1::m2).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果</p>
+<blockquote>
+<p>0 1 2 3 4 5 6 7 8 9 m2..</p>
+</blockquote>
+<h3 id="tryLock尝试锁定"><a href="#tryLock尝试锁定" class="headerlink" title="tryLock尝试锁定"></a>tryLock尝试锁定</h3><p>将m2()方法修改成如下形式，再次执行，观察结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用tryLock进行尝试锁定，不管锁定与否，方法都将继续执行， 可以根据tryLock的返回值来判断是否锁定，</span></span><br><span class="line"><span class="comment"> * 也可以指定tryLock的时间，由于tryLock(time)抛出异常，所以注意unLock的处理，必须放在finally中。 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">m2</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//        boolean locked = lock.tryLock();</span></span><br><span class="line"><span class="comment">//        System.out.println("m2..." + locked);</span></span><br><span class="line"><span class="comment">//        if (locked) lock.unlock();</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">boolean</span> locked=<span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        locked=lock.tryLock(<span class="number">3</span>,TimeUnit.SECONDS);</span><br><span class="line">        System.out.print(<span class="string">"m2 resume... "</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(InterruptedException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(locked)</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果（修改m2后继续执行第一段代码中的main方法）:</p>
+<blockquote>
+<p>0 1 2 3  m2 resume… 4 5 6 7 8 9</p>
+</blockquote>
+<h3 id="可以被打断的锁请求-可中断性质"><a href="#可以被打断的锁请求-可中断性质" class="headerlink" title="可以被打断的锁请求(可中断性质)"></a>可以被打断的锁请求(可中断性质)</h3><p>在多线程共同请求同一个Lock时，有时会希望某个线程能够被打断，从而终止等待的状态。</p>
+<p><strong>Lock.lockInterruptibly()</strong>方法同样可以请求一个<strong>可用的</strong>锁对象，如果锁对象不可用，则进入阻塞状态。但是与<strong>Lock.lock()</strong>不同的是，当程序中调用<strong>Thread.interrupt()</strong>方法打断线程时，前者会做出响应，而后者并不会。当然，即便是获得了锁对象，线程依然可以被打断，但是要记住在finally块中释放被打断线程中持有的锁对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InterruptWaitingDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                lock.lock();</span><br><span class="line">                System.out.println(<span class="string">"t1 start"</span>);</span><br><span class="line">                	TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);</span><br><span class="line">                System.out.println(<span class="string">"t1 end"</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                System.out.println(<span class="string">"interrupted!"</span>);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"t1"</span>);</span><br><span class="line">        t1.start();</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                lock.lockInterruptibly();</span><br><span class="line">                System.out.println(<span class="string">"t2 start"</span>);</span><br><span class="line">                TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">                System.out.println(<span class="string">"t2 end"</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                System.out.println(<span class="string">"Interrupted!"</span>);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">"finally：lock = "</span> + lock.tryLock());</span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"t2"</span>);</span><br><span class="line">        t2.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        t2.interrupt();<span class="comment">// 打断线程 t2，不论线程是否获得锁。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，线程t1持有lock对象，并一直锁定，t2无法得到这把锁，如果在线程t2中以原来的lock()方法请求锁的话，在线程外部无法打断该线程，但是使用lockInterruptibly()允许线程在外部被打断。</p>
+<blockquote>
+<p>t1 start<br>Interrupted!<br>Exception in thread “t2” java.lang.IllegalMonitorStateException<br>finally：lock = false<br>    at java.util.concurrent.locks.ReentrantLock$Sync.tryRelease(ReentrantLock.java:151)<br>    at java.util.concurrent.locks.AbstractQueuedSynchronizer.release(AbstractQueuedSynchronizer.java:1261)<br>    at java.util.concurrent.locks.ReentrantLock.unlock(ReentrantLock.java:457)<br>    at Demo.lambda$main$1(Demo.java:33)<br>    at java.lang.Thread.run(Thread.java:748)</p>
+</blockquote>
+<p>线程被打断后捕捉到 InterruptedException 异常，而上述是以输出“Interrupted!”字符串的形式提现，上述的异常并不是被打断的异常，而是未获取锁的情况下执行lock.unlock()抛出的异常。</p>
+<h3 id="ReentrantLock实现公平锁"><a href="#ReentrantLock实现公平锁" class="headerlink" title="ReentrantLock实现公平锁"></a>ReentrantLock实现公平锁</h3><p>公平锁指的是，哪个线程等待时间长就优先获得锁。synchronized属于非公平锁，这意味着锁被释放后其他线程会随机获得synchronized锁。</p>
+<p>ReentrantLock可以实现公平锁的需求。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>1、ReentrantLock是Lock接口经常用到的实现类，它可以代替synchronized实现相同的功能，但是需要手动调用 lock.unlock()释放锁。这也是与synchronized的区别最大的区别。</p>
+<p>2、手动锁在使用上更加灵活，操作性更强一些。可以尝试使用 tryLock() 和 lockInterruptibly() 等操作自定义锁的操作。</p>
+<p>3、ReentrantLock可以实现公平锁，但是在性能上会有些折扣。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -171,361 +223,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch/" class="archive-article-date">
-  	<time datetime="2019-07-23T12:29:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java多线程--线程通信wait/notify countdownlatch</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch/">Java多线程--线程通信wait/notify countdownlatch</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2019-07-21T13:13:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/">Java多线程--volatile关键字</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/18/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2019-07-18T11:32:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/18/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">Java多线程--synchronized关键字</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/" class="archive-article-date">
-  	<time datetime="2019-07-15T10:57:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/">Java多线程--死锁状态模拟</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2019-07-14T23:01:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/">Java多线程入门--序篇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-03T09:11:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-02T23:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2019-07-02T22:25:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/">算法学习--序篇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/" class="archive-article-date">
-  	<time datetime="2019-06-30T23:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/">写在博客创立之初</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随想</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -548,8 +345,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
