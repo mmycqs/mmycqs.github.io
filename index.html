@@ -132,6 +132,398 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java多线程-Executor框架与任务执行" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C/">Java多线程--Executor框架与任务执行</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C/" class="archive-article-date">
+  	<time datetime="2019-08-15T01:36:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>本文介绍通过“执行任务”的机制来设计应用程序时需要掌握的一些知识。所有的内容均提炼自《Java并发编程实战》中第六章的内容</p>
+<p>大多数并发应用程序都是围绕“任务执行”来构造的：任务通常是一些抽象的且离散的工作单元。</p>
+<p>当围绕“任务执行”来设计应用程序结构时，第一步，就是要找出清晰的任务边界。在理想情况下，各个任务之间是相互独立的：任务并不依赖于其他任务的状态、结果或边界效应。</p>
+<p>大多数服务器应用程序提供了一种自然的任务边界选择方式：以独立的客户请求为边界。</p>
+        
+          <a class="article-more-a" href="/2019/08/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java多线程-常用并发容器介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/10/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E7%94%A8%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%BB%8B%E7%BB%8D/">Java多线程--常用并发容器介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/10/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E7%94%A8%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
+  	<time datetime="2019-08-10T01:36:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>基于常用的并发容器，简单概括其基本特性和简单使用，并不涉及较深层次的原理分析和全面的场景用法。</p>
+<p>适合对不了解并发容器的同学，工作中遇到类似的场景，能够对文中提到的并发容器留有简单印象就好</p>
+<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>下面的程序中，切换任意Map的实现方式，如TreeMap、HashTable、ConcurrentHashMap等，运行程序，观察执行结果：</p>
+        
+          <a class="article-more-a" href="/2019/08/10/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E7%94%A8%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%BB%8B%E7%BB%8D/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/10/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E7%94%A8%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%BB%8B%E7%BB%8D/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java多线程-售票问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%94%AE%E7%A5%A8%E9%97%AE%E9%A2%98/">Java多线程--售票问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%94%AE%E7%A5%A8%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2019-08-07T01:13:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>现有一个需求如下：</p>
+<p>有10000张火车票，每张票都有一个编号，同时有10个窗口对外售票，如何确保车票的正常售卖？</p>
+<h3 id="程序一：使用List"><a href="#程序一：使用List" class="headerlink" title="程序一：使用List"></a>程序一：使用List</h3><p>问题的解决办法都是从我们最最熟悉的角度思考。程序一，我们使用一个普通的List作为方案。</p>
+<p>阅读以下代码，观察执行结果：</p>
+        
+          <a class="article-more-a" href="/2019/08/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%94%AE%E7%A5%A8%E9%97%AE%E9%A2%98/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%94%AE%E7%A5%A8%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java多线程-ThreadLocal" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/03/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-ThreadLocal/">Java多线程--ThreadLocal</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/03/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-ThreadLocal/" class="archive-article-date">
+  	<time datetime="2019-08-03T01:13:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ThreadLocal是Java帮助实现线程封闭性的典型手段。</p>
+<p><strong>作用：提供线程内的局部变量，这种变量在线程的生命周期内起作用，减少同一个线程内多个函数或组件之间一些公共变量的传递复杂度。同时也用来维护线程中的变量不被其他线程干扰。</strong></p>
+<p>这个类能使线程中的某个值与保存值的对象关联起来。ThreadLocal提供了get 与set方法，这些方法为每个使用该变量的线程都存有一份独立的副本，因此get总是返回由当前执行线程在调用set时设置的<strong>最新值</strong>。</p>
+        
+          <a class="article-more-a" href="/2019/08/03/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-ThreadLocal/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/03/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-ThreadLocal/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java多线程-Condition" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/01/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Condition/">Java多线程--Condition</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/01/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Condition/" class="archive-article-date">
+  	<time datetime="2019-08-01T01:13:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>使用Condition实现生产者-消费者模型，并与wait和notify实现的效果相对比。</p>
+<h3 id="wait-notify模拟生产者-消费者"><a href="#wait-notify模拟生产者-消费者" class="headerlink" title="wait/notify模拟生产者-消费者"></a>wait/notify模拟生产者-消费者</h3><p>面试题：写一个固定容量同步容器，拥有put和get方法，以及getCount方法能够支持2个生产线程以及10个消费者线程的阻塞调用。</p>
+<p>在《Effective Java》一书中提到：<strong>wait()方法（）绝大多数情况下都是和while一起使用的。</strong>这是因为，当wait()执行完成后，会立刻释放当前锁，如果这时其他线程立刻获得锁并对变量进行操作，会出现数据不一致的情况，使用while可以确保数据不会出现不一致的情况。</p>
+        
+          <a class="article-more-a" href="/2019/08/01/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Condition/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/01/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Condition/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java多线程-Lock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -521,391 +913,10 @@
 
 
   
-    <article id="post-Java多线程入门-序篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/">Java多线程入门--序篇</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2019-07-14T23:01:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>​    最近项目中用到了Java多线程，粗略学习了一下，发觉自己还是浮在表面上。因此，找了马士兵并发编程的课程来看了下，在此做个总结，也为了日后复习方便。</p>
-<p><a href="https://mmycqs.github.io/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/">死锁状态模拟</a></p>
-<p><a href="https://mmycqs.github.io/2019/07/20/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">sychronized关键字</a></p>
-<p><a href="https://mmycqs.github.io/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/">volatile关键字</a></p>
-<p><a href="https://mmycqs.github.io/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch">多线程通信</a></p>
-<p><a href="https://mmycqs.github.io/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/">ReentranLock</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-插入排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-03T09:11:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>思想：每次选择一个数插入到有序的数组中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> e = arr[i];</span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        <span class="keyword">for</span> (; j &gt; <span class="number">0</span> &amp;&amp; e &lt; arr[j-<span class="number">1</span>] ; j--) &#123;</span><br><span class="line">            arr[j] = arr[j-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        arr[j] = e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-选择排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-02T23:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>思想：每轮从数值中选出最小/大的一个值，时间复杂度O(n^2)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> arr[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="comment">//从[i,n)中选出最小的一个数</span></span><br><span class="line">        <span class="keyword">int</span> minIndex = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, i, minIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> t = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-算法学习-序篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/">算法学习--序篇</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2019-07-02T22:25:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="程序员的自我修养"><a href="#程序员的自我修养" class="headerlink" title="程序员的自我修养"></a>程序员的自我修养</h3><p>由于不是科班出身的，写代码的时候总是觉得内力不够，写出来的程序不是很理想，冗余代码特别多，感觉有必要花些时间来学习<em>数据结构与算法</em>，网上找了些专门介绍这些的网站，发现都不是很适合自己，加上工作了没有很多时间去深入研究，于是决定找些视频课程来看，找了几个，最后在慕课网上找到了liuyubobobo老师的&lt;玩转数据结构，从入门到进阶&gt;&lt;算法与数据结构课程&gt;，一看就上瘾，讲的由浅入深，非常不错。一个侧重于数据结构，一个侧重于算法，在此，也记录下我的学习笔记，希望自己能学有所成。</p>
-<h3 id="笔记："><a href="#笔记：" class="headerlink" title="笔记："></a>笔记：</h3><p><strong>[排序]</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://mmycqs.github.io/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://mmycqs.github.io/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a> </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-写在博客创立之初" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/">写在博客创立之初</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/" class="archive-article-date">
-  	<time datetime="2019-06-30T23:14:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安静"><a href="#安静" class="headerlink" title="安静"></a>安静</h2><p>只剩下钢琴陪我谈了一天</p>
-<p>睡着的大提琴</p>
-<p>安静的 旧旧的…</p>
-<hr>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到现在入职也快满三个月，工作强度大的有些出乎意料，加班加到怀疑人生。每天的忙碌让我精疲力尽，无所适从。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然而，如此的忙碌却也只是在心头抹过一丝痛，并未带来什么实质的收益。看似忙碌，学到的东西也只是浅尝辄止，达到基本能用的水平。然心有不甘，不想碌碌无为，浮于表面，于是有了此博客。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于此留念</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019.7.1</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随想</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/01/%E5%86%99%E5%9C%A8%E5%8D%9A%E5%AE%A2%E5%88%9B%E7%AB%8B%E4%B9%8B%E5%88%9D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
