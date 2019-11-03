@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
   <title>Java多线程入门--序篇 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简述​    最近项目中用到了Java多线程，粗略学习了一下，发觉自己还是浮在表面上。因此，找了马士兵并发编程的课程来看了下，在此做个总结，也为了日后复习方便。 死锁状态模拟 sychronized关键字 volatile关键字 多线程通信">
+  <meta name="description" content="简述​    最近项目中用到了Java多线程，粗略学习了一下，发觉自己还是浮在表面上。因此，找了马士兵并发编程的课程来看了下，在此做个总结，也为了日后复习方便。 死锁状态模拟 sychronized关键字 volatile关键字 多线程通信 ReentranLock">
 <meta name="keywords" content="Java多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java多线程入门--序篇">
 <meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;15&#x2F;Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="简述​    最近项目中用到了Java多线程，粗略学习了一下，发觉自己还是浮在表面上。因此，找了马士兵并发编程的课程来看了下，在此做个总结，也为了日后复习方便。 死锁状态模拟 sychronized关键字 volatile关键字 多线程通信">
+<meta property="og:description" content="简述​    最近项目中用到了Java多线程，粗略学习了一下，发觉自己还是浮在表面上。因此，找了马士兵并发编程的课程来看了下，在此做个总结，也为了日后复习方便。 死锁状态模拟 sychronized关键字 volatile关键字 多线程通信 ReentranLock">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-02T13:30:52.034Z">
+<meta property="og:updated_time" content="2019-11-03T00:58:00.695Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -156,6 +156,7 @@
 <p><a href="https://mmycqs.github.io/2019/07/20/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">sychronized关键字</a></p>
 <p><a href="https://mmycqs.github.io/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/">volatile关键字</a></p>
 <p><a href="https://mmycqs.github.io/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch">多线程通信</a></p>
+<p><a href="https://mmycqs.github.io/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/">ReentranLock</a></p>
 
       
 
@@ -393,11 +394,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编程内功</a>
+                <a href="javascript:void(0)" class="js-tag color3">随想</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随想</a>
+                <a href="javascript:void(0)" class="js-tag color5">编程内功</a>
               </li>
             
             <div class="clearfix"></div>
