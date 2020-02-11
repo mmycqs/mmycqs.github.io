@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
-  <title>选择排序 | mmycqs的博客</title>
+  <title>Java多线程--Executor框架与任务执行 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="选择排序思想：每轮从数值中选出最小&#x2F;大的一个值，时间复杂度O(n^2) 12345678910111213141516171819public static void sort(int arr[])&amp;#123;    int n = arr.length;    for (int i = 0; i &amp;lt; n; i++)&amp;#123;        &#x2F;&#x2F;从[i,n)中选出最小的一个数">
-<meta name="keywords" content="编程内功">
+  <meta name="description" content="概述本文介绍通过“执行任务”的机制来设计应用程序时需要掌握的一些知识。所有的内容均提炼自《Java并发编程实战》中第六章的内容 大多数并发应用程序都是围绕“任务执行”来构造的：任务通常是一些抽象的且离散的工作单元。 当围绕“任务执行”来设计应用程序结构时，第一步，就是要找出清晰的任务边界。在理想情况下，各个任务之间是相互独立的：任务并不依赖于其他任务的状态、结果或边界效应。 大多数服务器应用程序提">
+<meta name="keywords" content="Java多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="选择排序">
-<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;03&#x2F;%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F&#x2F;index.html">
+<meta property="og:title" content="Java多线程--Executor框架与任务执行">
+<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;10&#x2F;11&#x2F;Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="选择排序思想：每轮从数值中选出最小&#x2F;大的一个值，时间复杂度O(n^2) 12345678910111213141516171819public static void sort(int arr[])&amp;#123;    int n = arr.length;    for (int i = 0; i &amp;lt; n; i++)&amp;#123;        &#x2F;&#x2F;从[i,n)中选出最小的一个数">
+<meta property="og:description" content="概述本文介绍通过“执行任务”的机制来设计应用程序时需要掌握的一些知识。所有的内容均提炼自《Java并发编程实战》中第六章的内容 大多数并发应用程序都是围绕“任务执行”来构造的：任务通常是一些抽象的且离散的工作单元。 当围绕“任务执行”来设计应用程序结构时，第一步，就是要找出清晰的任务边界。在理想情况下，各个任务之间是相互独立的：任务并不依赖于其他任务的状态、结果或边界效应。 大多数服务器应用程序提">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-11T09:29:40.815Z">
+<meta property="og:updated_time" content="2020-02-11T09:40:00.505Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -131,28 +131,128 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-选择排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java多线程-Executor框架与任务执行" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      选择排序
+      Java多线程--Executor框架与任务执行
     </h1>
   
 
         
-        <a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-03T14:10:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
+        <a href="/2019/10/11/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C/" class="archive-article-date">
+  	<time datetime="2019-10-11T01:36:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>思想：每轮从数值中选出最小/大的一个值，时间复杂度O(n^2)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> arr[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="comment">//从[i,n)中选出最小的一个数</span></span><br><span class="line">        <span class="keyword">int</span> minIndex = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, i, minIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> t = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>本文介绍通过“执行任务”的机制来设计应用程序时需要掌握的一些知识。所有的内容均提炼自《Java并发编程实战》中第六章的内容</p>
+<p>大多数并发应用程序都是围绕“任务执行”来构造的：任务通常是一些抽象的且离散的工作单元。</p>
+<p>当围绕“任务执行”来设计应用程序结构时，第一步，就是要找出清晰的任务边界。在理想情况下，各个任务之间是相互独立的：任务并不依赖于其他任务的状态、结果或边界效应。</p>
+<p>大多数服务器应用程序提供了一种自然的任务边界选择方式：以独立的客户请求为边界。</p>
+<a id="more"></a>
+
+<h3 id="不好的例子：串行与“为每个任务创建线程”"><a href="#不好的例子：串行与“为每个任务创建线程”" class="headerlink" title="不好的例子：串行与“为每个任务创建线程”"></a>不好的例子：串行与“为每个任务创建线程”</h3><p>在书中6.1节，介绍了由最简单的串行执行任务到为每个任务创建一个线程这两种执行任务的方式。应该说这两种方式都是不可取的。</p>
+<p>这一节主要是为了引出下一节介绍的“任务执行框架”。</p>
+<p>其中“串行执行任务”的缺点是在一般的服务器应用程序中，无法提高吞吐率或快速响应性。</p>
+<p>而“<strong>为每个任务创建线程</strong>”的方式的问题在于可能导致：<strong>高性能开销、高资源消耗、影响稳定性。</strong></p>
+<blockquote>
+<p>【重点】在工作或面试中也会遇到这个极富针对性的问题，即大量创建线程会存在哪些问题？</p>
+<p><strong>1、高性能开销：</strong>创建和销毁都需要一定的代价，创建过程需要时间，延迟处理请求，也需要jvm和操作系统提供一些辅助操作。</p>
+<p><strong>2、高资源消耗：</strong>活跃的线程会消耗系统资源，尤其是内存。当可运行的线程数量多余可用处理器的数量，那么会有大量空闲的线程占用内存，不仅给垃圾回收带来压力，在竞争CPU的时候还将产生额外的性能开销。</p>
+<p><strong>3、影响稳定性：</strong>大量线程占用内存，内存不足，导致可能抛出OutOfMemoryError，系统崩溃。</p>
+</blockquote>
+<h3 id="线程数量的限制"><a href="#线程数量的限制" class="headerlink" title="线程数量的限制"></a>线程数量的限制</h3><p>书中在这里简单引出一个概念：稳定性。</p>
+<p>根据前后文的联系，这里具体指的是：<strong>应用程序不会因为线程过多而抛出OutOfMemoryError异常。</strong></p>
+<p>为了达到这种稳定性，在可创建线程数量上存在一个限制。这个限制受平台以及多个因素影响，包括JVM启动参数、Thread构造函数中请求的栈大小、底层操作系统对线程的限制等。例如，在32位机器上，其中一个主要的限制因素是线程栈的地址空间。每个线程都维护两个执行栈，一个用于Java代码，另一个用于原生代码。</p>
+<p>通常，JVM在默认情况下会生成一个<strong>复合栈</strong>，大小约0.5M~1M（这个值可以通过JVM标志 -Xss或通过Thread的构造函数来修改），那么：<strong>线程数量 ≈ 2^32(bit) / 0.5(MB) ≈几千或几万。</strong></p>
+<p>因此，在一定范围内，增加线程可以提高系统的吞吐率，但如果超出这个范围，再创建更多的线程只会降低程序的执行速度。</p>
+<h3 id="Executor接口"><a href="#Executor接口" class="headerlink" title="Executor接口"></a>Executor接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Executor</span> </span>&#123; </span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span></span>; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Executor是一个非常简单的接口，只有一个execute(Runnable) 方法，它是其他的灵活且强大的异步任务框架的基础。通过这种方式，用Runnable来表示任务，可以将<strong>任务的提交过程与执行过程解耦</strong>。</p>
+<p>Executor本身就是基于生产者消费者，提交任务相当于生产者，执行任务相当于消费者，因此，如果要在程序中实现一个生产者-消费者的设计，那么最简单的方式通常就是使用Executor。</p>
+<h3 id="什么是执行策略？"><a href="#什么是执行策略？" class="headerlink" title="什么是执行策略？"></a>什么是执行策略？</h3><p>执行策略，定义了任务执行的“<strong>what、where、when、how</strong>”等方面，主要是描述根据不同的资源而选择不同的执行方式，一个最优执行策略应当是与硬件资源最匹配的。</p>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>先来看一下四种常用线程池的创建：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(<span class="number">10</span>);  </span><br><span class="line">ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();  </span><br><span class="line">ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(<span class="number">10</span>);  </span><br><span class="line">ExecutorService newSingleThreadExecutor = Executors.newSingleThreadExecutor();</span><br></pre></td></tr></table></figure>
+
+<p>其中：<strong>ExecutorService</strong> extends <strong>Executor，ScheduledExecutorService</strong> extends <strong>ExecutorService 。</strong> </p>
+<blockquote>
+<p>1、newFixedThreadPool(int) ：创建一个定额线程池，每提交一个任务创建一个线程，达到数量限制后不再增加，这时线程池的规模将不再变化（如果某个线程由于发生了未预期的异常而结束，那么线程池会补充一个新的线程）</p>
+<p>2、NewCachedThreadPool() : 创建一个可缓存的线程池，线程池的规模不存在任何限制，当线程多余任务时，回收空闲线程；当任务增加时，创建新线程。</p>
+<p>3、NewSingleThreadExecutor：单线程的Executor，如果这个线程异常结束，会创建另一个线程来替代。NewSingleThreadExecutor能确保依照任务在队列中的顺序串行执行（例如FIFO、LIFO、优先级）。</p>
+<p>4、NewScheduleThreadPool：创建一个固定长度的线程池，而且以延迟或定时的方式来执行任务，类似于Timer。</p>
+</blockquote>
+<h3 id="Executor的生命周期"><a href="#Executor的生命周期" class="headerlink" title="Executor的生命周期"></a>Executor的生命周期</h3><p>JVM只有在所有（非守护）线程全部终止后才会退出，无法正确地关闭Executor，JVM将无法结束。</p>
+<p>Executor以异步的方式来执行任务，导致了提交任务的状态不是立即可见的，即有些任务可能已经完成，有些可能正在执行，还有些可能正在队列中等待执行。</p>
+<p>ExecutorSevice接口就是为了解决执行服务的生命周期问题，扩展了Executor接口。它添加了一些用于声明周期管理的方法（同时还有一些用于任务提交的便利方法）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ExecutorService</span> <span class="keyword">extends</span> <span class="title">Executor</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span></span>;  </span><br><span class="line">    <span class="function">List&lt;Runnable&gt; <span class="title">shutdownNow</span><span class="params">()</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isShutdown</span><span class="params">()</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isTerminated</span><span class="params">()</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">awaitTermination</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span>  </span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> InterruptedException</span>;  </span><br><span class="line">    <span class="comment">// ......其他用于任务提交的便利方法  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这五个方法是声明周期管理的方法，其余的都是与任务提交相关的方法，比如，可以提交比较大的集合Callable对象的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>【重点】ExecutorService的三种状态：运行、关闭、已终止 。</strong></p>
+</blockquote>
+<p>ExecutorService在初始创建时处于运行状态。shutdown()方法将执行平缓的关闭过程：不再接受新的任务，同时等待已经提交的任务执行完成——包括那些还未开始执行的任务。shutdownNow()方法将执行粗暴的关闭方式：它将尝试取消所有运行中的任务，并且不再启动队列中尚未开始执行的任务。</p>
+<h3 id="延迟任务与周期任务"><a href="#延迟任务与周期任务" class="headerlink" title="延迟任务与周期任务"></a>延迟任务与周期任务</h3><p>Timer类负责管理延迟任务以及周期任务，但它本身存在缺陷，因此通常要用ScheduleThreadPoolExecutor的构造函数或newScheduleThreadPool工厂方法来创建该类对象。</p>
+<p>Timer的缺陷在于，Timer在执行所有定时任务时只会创建一个线程。如果某个任务的执行时间过长，那么将破坏其他TimerTask的定时精确性。</p>
+<p>Timer还有一个问题就是，Timer线程不会捕获异常，当TimerTask抛出未检查异常时将终止定时线程。Timer也不会恢复线程的执行，而是会错误地任务整个Timer都被取消了。这就造成：<strong>已经被调度但尚未执行的TimerTask将不会再执行，新的任务也不会被调度。称之为“线程泄漏”。</strong></p>
+<p>【重点】生命周期小结</p>
+<blockquote>
+<p>Runnable和Callable等任务的生命周期：创建、提交、开始、完成、取消。</p>
+<p>Future表示的就是一个任务的生命周期。</p>
+<p>Thread的生命周期：创建、就绪、运行、阻塞、死亡（或结束）。</p>
+<p>ExecutorService的生命周期（因为它继承自Executor，因此也是Executor的生命周期）：创建、运行、关闭、已终止。</p>
+</blockquote>
+<h3 id="Callable与Future"><a href="#Callable与Future" class="headerlink" title="Callable与Future"></a>Callable与Future</h3><h4 id="callable"><a href="#callable" class="headerlink" title="callable"></a>callable</h4><p>Runnable有一个局限性是没有返回值，也没办法抛出受检异常。对于某些异步获得结果的任务无法胜任，Callable应运而生。</p>
+<p>它是Runnable的升级版，既可以使用Callable<Void>来达到Runnable一样的效果，同时也可以使用Callable<T> 来指定返回结果。</p>
+<p>创建Callable的方式有两种：构造函数、静态的封装方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Callable&lt;String&gt; callableTask = <span class="keyword">new</span> Callable&lt;String&gt;() &#123;  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="string">"this is a callable task...."</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Java 8 style：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Callable&lt;String&gt; callableTask = () -&gt; &#123; </span><br><span class="line">  <span class="keyword">return</span> <span class="string">"this is a callable task...."</span>; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>静态方法：Executors.callable(Runnable task, T result)：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Callable&lt;String&gt; call = Executors.callable(() -&gt; &#123;</span><br><span class="line">    System.out.println(<span class="string">"this is a runnable task..."</span>);</span><br><span class="line">&#125;, <span class="string">"done!"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h3><p><strong>future表示一个任务的生命周期</strong>。主要提供了一些方法用于判断任务处于哪个阶段，还可以获取任务的结果甚至是取消任务。它本身还有一层隐含意义是，任务的生命周期只能前进，不能后退，当一个任务处于“完成”状态，就永远停留在“完成”状态上。这一点和ExecutorService的生命周期一样。<br>Future接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Future</span>&lt;<span class="title">V</span>&gt; </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">cancel</span><span class="params">(<span class="keyword">boolean</span> mayInterruptIfRunning)</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isCancelled</span><span class="params">()</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isDone</span><span class="params">()</span></span>;  </span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ExecutionException</span>;  </span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span>  </span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> InterruptedException, ExecutionException, TimeoutException</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建Future的方式通常是使用ExecutorService的submit()方法获取返回值。如果想通过构造器的方式显式地创建一个任务的生命周期管理对象，可以使用FutureTask。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FutureTask&lt;String&gt; runnFutureTask = <span class="keyword">new</span> FutureTask&lt;String&gt;(runnable, <span class="string">"done!"</span>);  </span><br><span class="line">FutureTask&lt;String&gt; callFutureTask = <span class="keyword">new</span> FutureTask&lt;&gt;(callable);</span><br></pre></td></tr></table></figure>
+
+<p>FutureTask类实现了Runnable和Future两个接口。</p>
+<p>（说明：FutureTask是Java 5加入的类，Java 6又为它补充了一个新的RunnableFuture接口，Runnable接口和Future接口被提升到了RunnableFuture接口上，这更像是一种重构手段，我个人认为在实际开发中用途可能不及直接使用FutureTask）</p>
+<blockquote>
+<p>由于FutureTask实现了Runnable接口，因此可以将它<strong>提交给Executor来执行</strong>，或者<strong>直接调用它的run方法。</strong></p>
+</blockquote>
+<p>是的，FutureTask的run()方法可以直接执行任务，而不需要什么start。</p>
+<h4 id="Future-get"><a href="#Future-get" class="headerlink" title="Future.get"></a>Future.get</h4><p>get()方法的行为取决于任务的状态（尚未开始、正在运行、已完成）如果任务已经完成，那么get会立即返回或抛出一个Exception；如果任务没有完成，那么get将阻塞直到任务完成。如果任务抛出异常，那么get将该异常封装成ExecutionException并重新抛出，可以通过getCause来进一步获得被封装的初始异常。如果任务被取消，那么get将抛出CancellationException。</p>
+<h3 id="异构任务并行化存在的局限"><a href="#异构任务并行化存在的局限" class="headerlink" title="异构任务并行化存在的局限"></a>异构任务并行化存在的局限</h3><p>A与B两个完全不同的任务通过并行方式可以实现小幅度的性能提升，但是如果想大幅度的提升存在一定的困难。因此，得出一个结论是，只有当大量相互独立且同构的任务可以并发进行处理时，才能体现出真正的性能提升。</p>
+<h3 id="CompletionService与它的子类ExecutorCompletionService"><a href="#CompletionService与它的子类ExecutorCompletionService" class="headerlink" title="CompletionService与它的子类ExecutorCompletionService"></a>CompletionService与它的子类ExecutorCompletionService</h3><p>CompletionService是Executor与BlockingQueue的融合。</p>
+<p>回顾一下BlockingQueue的一些特性:</p>
+<blockquote>
+<p>BlockingQueue接口是Queue的子接口，有两个最主要的实现，LinkedBlockingQueue（无界队列）和ArrayBlockingQueue（有界队列）。take()或poll()方法都是BlockingQueue的取头元素的方法，唯一不同的是当没有可用的头元素时，take会无限期等待（阻塞），poll可以设置一个超时时间，一旦超时，将返回null。</p>
+<p>CompletionService是在任务执行的功能上加入了队列的特性，很明显是用于处理一批允许有返回值的任务。</p>
+</blockquote>
+<p><strong>用法：</strong>创建一个CompletionService（ExecutorCompletionService对象）。【ExecutorCompletionService的构造器允许我们传入一个ExecutorService（用于采取不同的执行策略）和一个BlockingQueue（该参数可选，默认LinkedBlockingQueue）】然后可以将一组Callable任务提交给CompletionService来执行，然后使用类似队列操作的take或poll方法来获取已完成的结果，这些结果会在完成时被封装为Future。<br><strong>【扩展】</strong>ExecutorCompletionService的实现很简单。首先通过构造函数创建一个BlockingQueue来保存计算结果，然后当计算完成时，调用FutureTask的done方法，放入队列。展开：当提交某个任务时，该任务将首先包装为一个QueueingFuture，这是FutureTask【回顾：FutureTask实现了Future、Runnable】的一个子类，QueueingFuture改写了FutureTask的done方法——将结果放入BlockingQueue中。take和poll方法委托给BlockingQueue方法，这些方法会在得到结果之前阻塞。</p>
+<h3 id="为任务设置时限"><a href="#为任务设置时限" class="headerlink" title="为任务设置时限"></a>为任务设置时限</h3><p>有时候，如果某个任务无法在指定时间内完成，那么将不再需要它的结果，此时可以放弃这个任务。Future.get中支持这种需求：当结果可用时，它将立即返回，如果在指定时限内没有计算出结果，那么抛出TimeoutException。</p>
+<p>在使用时限任务时需要注意，当这些任务超市后应该立即停止，从而避免为继续计算一个不再使用的结果而浪费计算资源。</p>
+<p>【使用Future.get为单个任务设置时限，如果希望对一组任务设置计算时限，比如前面介绍的CompletionService，那么可以使用poll方法来设置执行时间】</p>
+<h3 id="invokeAll方法"><a href="#invokeAll方法" class="headerlink" title="invokeAll方法"></a>invokeAll方法</h3><p>ExecutorServie接口中有两个重载的invokeAll方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)  </span><br><span class="line">    <span class="keyword">throws</span> InterruptedException;  </span><br><span class="line">&lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,  </span><br><span class="line">                              <span class="keyword">long</span> timeout, TimeUnit unit)  </span><br><span class="line">    <span class="keyword">throws</span> InterruptedException;</span><br></pre></td></tr></table></figure>
+
+<p>invokeAll方法支持将多个任务提交到一个ExecutorService并获得结果。invokeAll方法的参数为一组任务，并返回一组Future。invokeAll按照任务集合中迭代器的顺序将所有的Future添加到返回的集合中，从而使调用者能够将各个Future与其表示的Callable关联起来。</p>
+<p>当所有任务都执行完毕时，或者调用线程被中断时，又或者超过指定时限时，invokeAll都会返回。当超过指定时限，任何还未完成的任务都会取消。当invokeAll返回后，每个任务要么正常完成，要么被取消，而客户端代码可以调用get或isCancelled来判断究竟是何种情况。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过围绕任务执行来设计应用程序，可以简化开发过程，并有助于实现并发。</p>
+<p>Executor框架将任务提交与执行策略解耦开来，同时还支持多种不同类型的执行策略。当需要创建线程来执行任务时，可以考虑使用Executor。</p>
+<p>要想在将应用程序分解为不同的任务时获得最大的好处，必须定义清晰的任务边界。某些应用程序中存在着比较明显的任务边界，而在其他一些程序中则需要进一步分析才能揭示出粒度更细的并行性。</p>
+
       
 
       
@@ -186,7 +286,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
         		</li>
       		
 		</ul>
@@ -242,7 +342,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/10/11/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -256,18 +356,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/23/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF36%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E8%B0%88%E8%B0%88%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          插入排序
+          Java核心技术36讲学习笔记--1.谈谈对Java平台的理解
         
       </div>
     </a>
   
   
-    <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">算法与数据结构学习--序篇</div>
+    <a href="/2019/10/10/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E7%94%A8%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%BB%8B%E7%BB%8D/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java多线程--常用并发容器介绍</div>
       <i class="icon-circle-right"></i>
     </a>
   

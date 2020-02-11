@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
-  <title>选择排序 | mmycqs的博客</title>
+  <title>Java核心技术36讲学习笔记--1.谈谈对Java平台的理解 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="选择排序思想：每轮从数值中选出最小&#x2F;大的一个值，时间复杂度O(n^2) 12345678910111213141516171819public static void sort(int arr[])&amp;#123;    int n = arr.length;    for (int i = 0; i &amp;lt; n; i++)&amp;#123;        &#x2F;&#x2F;从[i,n)中选出最小的一个数">
-<meta name="keywords" content="编程内功">
+  <meta name="description" content="###问题：谈谈对Java平台的理解 典型回答：Java是一种面向对象的语言，最显著的特性有二：一为Write Once,Run everywhere；二为垃圾收集GC。 考点分析：题目本身是非常开放的，往往考察的是多个方面，比如，基础知识理解是否很清楚；是否掌握 Java 平台主要模块和运行原理等。 对于这类笼统的问题，你需要尽量表现出自己的思维深入并系统化，Java 知识理解得也比较全面。 知">
+<meta name="keywords" content="Java学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="选择排序">
-<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;03&#x2F;%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F&#x2F;index.html">
+<meta property="og:title" content="Java核心技术36讲学习笔记--1.谈谈对Java平台的理解">
+<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;11&#x2F;23&#x2F;Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF36%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E8%B0%88%E8%B0%88%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="选择排序思想：每轮从数值中选出最小&#x2F;大的一个值，时间复杂度O(n^2) 12345678910111213141516171819public static void sort(int arr[])&amp;#123;    int n = arr.length;    for (int i = 0; i &amp;lt; n; i++)&amp;#123;        &#x2F;&#x2F;从[i,n)中选出最小的一个数">
+<meta property="og:description" content="###问题：谈谈对Java平台的理解 典型回答：Java是一种面向对象的语言，最显著的特性有二：一为Write Once,Run everywhere；二为垃圾收集GC。 考点分析：题目本身是非常开放的，往往考察的是多个方面，比如，基础知识理解是否很清楚；是否掌握 Java 平台主要模块和运行原理等。 对于这类笼统的问题，你需要尽量表现出自己的思维深入并系统化，Java 知识理解得也比较全面。 知">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-11T09:29:40.815Z">
+<meta property="og:updated_time" content="2020-02-11T09:35:00.086Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -131,28 +131,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-选择排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java核心技术36讲学习笔记-1-谈谈对Java平台的理解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      选择排序
+      Java核心技术36讲学习笔记--1.谈谈对Java平台的理解
     </h1>
   
 
         
-        <a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-03T14:10:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
+        <a href="/2019/11/23/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF36%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E8%B0%88%E8%B0%88%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2019-11-23T13:31:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>思想：每轮从数值中选出最小/大的一个值，时间复杂度O(n^2)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> arr[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="comment">//从[i,n)中选出最小的一个数</span></span><br><span class="line">        <span class="keyword">int</span> minIndex = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, i, minIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> t = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <p>###问题：谈谈对Java平台的理解</p>
+<h4 id="典型回答："><a href="#典型回答：" class="headerlink" title="典型回答："></a>典型回答：</h4><p>Java是一种面向对象的语言，最显著的特性有二：一为<strong>Write Once,Run everywhere</strong>；二为<strong>垃圾收集GC</strong>。</p>
+<h4 id="考点分析："><a href="#考点分析：" class="headerlink" title="考点分析："></a>考点分析：</h4><p>题目本身是非常开放的，往往考察的是多个方面，比如，基础知识理解是否很清楚；是否掌握 Java 平台主要模块和运行原理等。</p>
+<p>对于这类笼统的问题，你需要尽量<strong>表现出自己的思维深入并系统化，Java 知识理解得也比较全面</strong>。</p>
+<h4 id="知识扩展："><a href="#知识扩展：" class="headerlink" title="知识扩展："></a>知识扩展：</h4><p><strong>Java 语言特性</strong>，包括泛型、Lambda 等语言特性；<strong>基础类库</strong>，包括集合、IO/NIO、网络、并发、安全等基础类库。谈谈 <strong>JVM</strong> 的一些基础概念和机制，比如 Java 的类加载机制，常用版本 JDK，自定义 Class-Loader 等。还有垃圾收集的基本原理，最常见的垃圾收集器；JDK 包含哪些<strong>工具</strong>或者 Java 领域内其他工具等，如编译器、运行时环境、安全工具、诊断和监控工具</p>
+
       
 
       
@@ -186,7 +190,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java学习</a>
         		</li>
       		
 		</ul>
@@ -242,7 +246,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/11/23/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF36%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E8%B0%88%E8%B0%88%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -256,18 +260,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          插入排序
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">算法与数据结构学习--序篇</div>
+    <a href="/2019/10/11/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java多线程--Executor框架与任务执行</div>
       <i class="icon-circle-right"></i>
     </a>
   

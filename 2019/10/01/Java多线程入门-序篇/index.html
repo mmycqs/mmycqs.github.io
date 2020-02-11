@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
-  <title>选择排序 | mmycqs的博客</title>
+  <title>Java多线程入门--序篇 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="选择排序思想：每轮从数值中选出最小&#x2F;大的一个值，时间复杂度O(n^2) 12345678910111213141516171819public static void sort(int arr[])&amp;#123;    int n = arr.length;    for (int i = 0; i &amp;lt; n; i++)&amp;#123;        &#x2F;&#x2F;从[i,n)中选出最小的一个数">
-<meta name="keywords" content="编程内功">
+  <meta name="description" content="简述​    最近项目中用到了Java多线程，粗略学习了一下，发觉自己还是浮在表面上。因此，找了马士兵并发编程的课程来看了下，在此做个总结，也为了日后复习方便。 死锁状态模拟 sychronized关键字 volatile关键字 多线程通信 ReentranLock Lock与Condition ThreadLocal 售票问题 常用并发容器介绍 Executor框架与任务执行">
+<meta name="keywords" content="Java多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="选择排序">
-<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;03&#x2F;%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F&#x2F;index.html">
+<meta property="og:title" content="Java多线程入门--序篇">
+<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;10&#x2F;01&#x2F;Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="选择排序思想：每轮从数值中选出最小&#x2F;大的一个值，时间复杂度O(n^2) 12345678910111213141516171819public static void sort(int arr[])&amp;#123;    int n = arr.length;    for (int i = 0; i &amp;lt; n; i++)&amp;#123;        &#x2F;&#x2F;从[i,n)中选出最小的一个数">
+<meta property="og:description" content="简述​    最近项目中用到了Java多线程，粗略学习了一下，发觉自己还是浮在表面上。因此，找了马士兵并发编程的课程来看了下，在此做个总结，也为了日后复习方便。 死锁状态模拟 sychronized关键字 volatile关键字 多线程通信 ReentranLock Lock与Condition ThreadLocal 售票问题 常用并发容器介绍 Executor框架与任务执行">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-11T09:29:40.815Z">
+<meta property="og:updated_time" content="2020-02-11T09:33:03.306Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -131,28 +131,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-选择排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java多线程入门-序篇" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      选择排序
+      Java多线程入门--序篇
     </h1>
   
 
         
-        <a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-03T14:10:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
+        <a href="/2019/10/01/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/" class="archive-article-date">
+  	<time datetime="2019-10-01T09:01:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>思想：每轮从数值中选出最小/大的一个值，时间复杂度O(n^2)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> arr[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="comment">//从[i,n)中选出最小的一个数</span></span><br><span class="line">        <span class="keyword">int</span> minIndex = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, i, minIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> t = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>​    最近项目中用到了Java多线程，粗略学习了一下，发觉自己还是浮在表面上。因此，找了马士兵并发编程的课程来看了下，在此做个总结，也为了日后复习方便。</p>
+<p><a href="https://mmycqs.github.io/2019/07/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/">死锁状态模拟</a></p>
+<p><a href="https://mmycqs.github.io/2019/07/20/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">sychronized关键字</a></p>
+<p><a href="https://mmycqs.github.io/2019/07/21/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-volatile%E5%85%B3%E9%94%AE%E5%AD%97/">volatile关键字</a></p>
+<p><a href="https://mmycqs.github.io/2019/07/23/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1wait-notify-countdownlatch">多线程通信</a></p>
+<p><a href="https://mmycqs.github.io/2019/07/25/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/">ReentranLock</a></p>
+<p><a href="https://mmycqs.github.io/2019/08/01/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Condition/">Lock与Condition</a></p>
+<p><a href="https://mmycqs.github.io/2019/08/03/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-ThreadLocal/">ThreadLocal</a></p>
+<p><a href="https://mmycqs.github.io/2019/08/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%94%AE%E7%A5%A8%E9%97%AE%E9%A2%98/">售票问题</a></p>
+<p><a href="https://mmycqs.github.io/2019/08/10/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B8%B8%E7%94%A8%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%BB%8B%E7%BB%8D/">常用并发容器介绍</a></p>
+<p><a href="https://mmycqs.github.io/2019/08/15/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Executor%E6%A1%86%E6%9E%B6%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C/">Executor框架与任务执行</a></p>
+
       
 
       
@@ -186,7 +196,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
         		</li>
       		
 		</ul>
@@ -242,7 +252,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/10/01/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8-%E5%BA%8F%E7%AF%87/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -256,18 +266,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/03/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E6%A8%A1%E6%8B%9F/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          插入排序
+          Java多线程--死锁状态模拟
         
       </div>
     </a>
   
   
-    <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">算法与数据结构学习--序篇</div>
+    <a href="/2019/09/03/%E7%8E%A9%E8%BD%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">玩转数据结构--动态数组</div>
       <i class="icon-circle-right"></i>
     </a>
   

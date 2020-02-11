@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mmycqs.github.io">
-  <title>选择排序 | mmycqs的博客</title>
+  <title>Java多线程--售票问题 | mmycqs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="选择排序思想：每轮从数值中选出最小&#x2F;大的一个值，时间复杂度O(n^2) 12345678910111213141516171819public static void sort(int arr[])&amp;#123;    int n = arr.length;    for (int i = 0; i &amp;lt; n; i++)&amp;#123;        &#x2F;&#x2F;从[i,n)中选出最小的一个数">
-<meta name="keywords" content="编程内功">
+  <meta name="description" content="概述现有一个需求如下： 有10000张火车票，每张票都有一个编号，同时有10个窗口对外售票，如何确保车票的正常售卖？ 程序一：使用List问题的解决办法都是从我们最最熟悉的角度思考。程序一，我们使用一个普通的List作为方案。 阅读以下代码，观察执行结果：">
+<meta name="keywords" content="Java多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="选择排序">
-<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;07&#x2F;03&#x2F;%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F&#x2F;index.html">
+<meta property="og:title" content="Java多线程--售票问题">
+<meta property="og:url" content="https:&#x2F;&#x2F;mmycqs.github.io&#x2F;2019&#x2F;10&#x2F;07&#x2F;Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%94%AE%E7%A5%A8%E9%97%AE%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="mmycqs的博客">
-<meta property="og:description" content="选择排序思想：每轮从数值中选出最小&#x2F;大的一个值，时间复杂度O(n^2) 12345678910111213141516171819public static void sort(int arr[])&amp;#123;    int n = arr.length;    for (int i = 0; i &amp;lt; n; i++)&amp;#123;        &#x2F;&#x2F;从[i,n)中选出最小的一个数">
+<meta property="og:description" content="概述现有一个需求如下： 有10000张火车票，每张票都有一个编号，同时有10个窗口对外售票，如何确保车票的正常售卖？ 程序一：使用List问题的解决办法都是从我们最最熟悉的角度思考。程序一，我们使用一个普通的List作为方案。 阅读以下代码，观察执行结果：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-11T09:29:40.815Z">
+<meta property="og:updated_time" content="2020-02-11T09:31:04.613Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="mmycqs的博客" type="application/atom+xml">
@@ -131,28 +131,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-选择排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java多线程-售票问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      选择排序
+      Java多线程--售票问题
     </h1>
   
 
         
-        <a href="/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2019-07-03T14:10:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
+        <a href="/2019/10/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%94%AE%E7%A5%A8%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2019-10-07T01:13:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>思想：每轮从数值中选出最小/大的一个值，时间复杂度O(n^2)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> arr[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="comment">//从[i,n)中选出最小的一个数</span></span><br><span class="line">        <span class="keyword">int</span> minIndex = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, i, minIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> t = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>现有一个需求如下：</p>
+<p>有10000张火车票，每张票都有一个编号，同时有10个窗口对外售票，如何确保车票的正常售卖？</p>
+<h3 id="程序一：使用List"><a href="#程序一：使用List" class="headerlink" title="程序一：使用List"></a>程序一：使用List</h3><p>问题的解决办法都是从我们最最熟悉的角度思考。程序一，我们使用一个普通的List作为方案。</p>
+<p>阅读以下代码，观察执行结果：</p>
+<a id="more"></a>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TicketSell_01</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> List&lt;String&gt; tickets = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)</span><br><span class="line">            tickets.add(<span class="string">"票编号： "</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">while</span> (tickets.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"销售了--"</span> + tickets.remove(<span class="number">0</span>));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下，可以看到，编号0的车票被销售了两次。List不是同步容器，容器内的remove()等方法都无法做到原子性，因此会出现重复售票的问题，因此是不安全的：</p>
+<blockquote>
+<p>销售了–票编号： 0<br>销售了–票编号： 2<br>销售了–票编号： 1<br>销售了–票编号： 5<br>销售了–票编号： 6<br>销售了–票编号： 4<br>销售了–票编号： 3<br>销售了–票编号： 8</p>
+</blockquote>
+<h3 id="程序二：使用Vector"><a href="#程序二：使用Vector" class="headerlink" title="程序二：使用Vector"></a>程序二：使用Vector</h3><p>以Vector代替List作为容器。区别是，Vector是同步容器，内部的方法都是同步的。但是下面的代码依然会存在问题。</p>
+<p>虽然size()方法和remove()方法本身是原子性的，其他线程无法打断，但是在判断size和remove之间的部分依然会有线程交叉执行的可能，这样，虽然可以解决重复销售的问题，但是依然会导致：ArrayIndexOutOfBoundsException</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TicketSell_02</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Vector&lt;String&gt; tickets = <span class="keyword">new</span> Vector&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)</span><br><span class="line">            tickets.add(<span class="string">"票编号： "</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">while</span> (tickets.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        TimeUnit.MILLISECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(<span class="string">"销售了--"</span> + tickets.remove(<span class="number">0</span>));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>销售了–票编号： 9995<br>销售了–票编号： 9996<br>销售了–票编号： 9997<br>销售了–票编号： 9999<br>销售了–票编号： 9998<br>Exception in thread “Thread-1” Exception in thread “Thread-5” Exception in thread “Thread-7” Exception in thread “Thread-3” java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 0<br>    at java.util.Vector.remove(Vector.java:834)<br>    at Demo.lambda$main$0(Demo.java:21)<br>    at java.lang.Thread.run(Thread.java:748)<br>java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 0<br>    at java.util.Vector.remove(Vector.java:834)<br>    at Demo.lambda$main$0(Demo.java:21)<br>    at java.lang.Thread.run(Thread.java:748)<br>java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 0<br>    at java.util.Vector.remove(Vector.java:834)<br>    at Demo.lambda$main$0(Demo.java:21)<br>    at java.lang.Thread.run(Thread.java:748)<br>java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 0<br>    at java.util.Vector.remove(Vector.java:834)<br>    at Demo.lambda$main$0(Demo.java:21)<br>    at java.lang.Thread.run(Thread.java:748)<br>Exception in thread “Thread-9” java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 0<br>    at java.util.Vector.remove(Vector.java:834)<br>    at Demo.lambda$main$0(Demo.java:21)</p>
+</blockquote>
+<h3 id="程序三：同步"><a href="#程序三：同步" class="headerlink" title="程序三：同步"></a>程序三：同步</h3><p>使用synchronized进行线程同步，可以有效解决逻辑问题，但是很明显，这种方法的缺点就是效率低下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TicketSell_03</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> List&lt;String&gt; tickets = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)</span><br><span class="line">            tickets.add(<span class="string">"票编号： "</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                    <span class="keyword">synchronized</span> (tickets) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (tickets.size() == <span class="number">0</span>)</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        System.out.println(<span class="string">"销售了票--"</span> + tickets.remove(<span class="number">0</span>));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="程序四：并发容器Queue"><a href="#程序四：并发容器Queue" class="headerlink" title="程序四：并发容器Queue"></a>程序四：并发容器Queue</h3><p>ConcurrentLinkedQueue<strong>是一个并发队列。但凡并发容器，其内部的方法都保证是原子性的</strong>。下面的代码中poll()表示从队列的头部获得一个数据，当返回值为null时，代表这个队列已经没有值了。<strong>因为队列本身不允许存null值，否则会报空指针异常，因此当返回值为null时，一定表示队列已空（size() == 0）</strong>。队列的底层是使用一个叫做<strong>CompareAndSet（CAS）</strong>的技术实现的，不是加锁的实现，因此在高并发的情况下依然可以拥有很高的效率。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TicketSell_04</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Queue&lt;String&gt; tickets = <span class="keyword">new</span> ConcurrentLinkedQueue&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)</span><br><span class="line">            tickets.add(<span class="string">"票编号： "</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                    String s = tickets.poll();</span><br><span class="line">                    <span class="keyword">if</span> (s == <span class="keyword">null</span>)</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        System.out.println(<span class="string">"销售了--"</span> + s);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -186,7 +210,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程内功</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java多线程</a>
         		</li>
       		
 		</ul>
@@ -242,7 +266,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/07/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mmycqs.github.io/2019/10/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%94%AE%E7%A5%A8%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -256,18 +280,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/08/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-synchronized%E5%85%B3%E9%94%AE%E5%AD%97/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          插入排序
+          Java多线程--synchronized关键字
         
       </div>
     </a>
   
   
-    <a href="/2019/07/03/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%BA%8F%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">算法与数据结构学习--序篇</div>
+    <a href="/2019/10/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-Lock/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java多线程--Lock</div>
       <i class="icon-circle-right"></i>
     </a>
   
